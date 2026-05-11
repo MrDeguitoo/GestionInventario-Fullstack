@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bodega {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,5 +25,5 @@ public class Bodega {
     private String direccion;
 
     @Column(length = 50)
-    private String tipo; // Ej: "PRINCIPAL", "SUCURSAL", "FRIGORIFICO"
+    private String tipo; // Ej: "PRINCIPAL", "SUCURSAL"
 }

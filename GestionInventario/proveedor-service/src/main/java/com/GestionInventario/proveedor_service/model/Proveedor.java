@@ -1,4 +1,4 @@
-package com.gestioninventario.proveedor.model;
+package com.GestionInventario.proveedor_service.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Proveedor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,12 +25,11 @@ public class Proveedor {
     @Column(nullable = false, length = 150)
     private String razonSocial;
 
-    @NotBlank(message = "El correo de ventas es obligatorio")
-    @Email(message = "Formato de correo inválido")
+    @NotBlank(message = "El correo es obligatorio")
+    @Email
     @Column(nullable = false, length = 100)
     private String correoVentas;
 
-    @NotBlank(message = "El teléfono es obligatorio")
     @Column(nullable = false, length = 20)
     private String telefono;
 }
