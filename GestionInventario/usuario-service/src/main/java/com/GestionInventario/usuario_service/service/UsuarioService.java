@@ -24,6 +24,15 @@ public class UsuarioService {
     }
 
     @Transactional
+    public Usuario actualizar(Long id, Usuario datos) {
+        Usuario usuario = buscarPorId(id);
+        usuario.setNombre(datos.getNombre());
+        usuario.setCorreo(datos.getCorreo());
+        usuario.setRol(datos.getRol());
+        return usuarioRepository.save(usuario);
+    }
+
+    @Transactional
     public Usuario guardar(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
