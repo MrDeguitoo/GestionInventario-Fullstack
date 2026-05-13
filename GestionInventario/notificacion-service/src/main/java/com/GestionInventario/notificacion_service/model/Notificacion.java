@@ -32,5 +32,5 @@ public class Notificacion {
     private LocalDateTime fechaEnvio = LocalDateTime.now();
 
     @NotBlank
-    private String estadoEnvio; // Ej: "ENVIADO", "FALLIDO"
+    private String estadoEnvio;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class NotificacionService {
 
     @Autowired
-    private NotificacionRepository notificacionRepository; // <-- Corregido con 'n' minúscula
+    private NotificacionRepository notificacionRepository;
 
     public List<Notificacion> listarTodos() {
         return notificacionRepository.findAll();
@@ -23,7 +23,7 @@ public class NotificacionService {
     }
 
     @Transactional
-    public Notificacion guardar(Notificacion notificacion) { // <-- Nombre de variable corregido
+    public Notificacion guardar(Notificacion notificacion) {
         return notificacionRepository.save(notificacion);
     }
 

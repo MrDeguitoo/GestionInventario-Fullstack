@@ -21,7 +21,7 @@ public class Producto {
 
     @NotBlank(message = "El SKU es obligatorio")
     @Column(unique = true, nullable = false, length = 50)
-    private String sku; // Código de barras o identificador único
+    private String sku;
 
     @NotBlank(message = "El nombre del producto es obligatorio")
     @Column(nullable = false, length = 150)
