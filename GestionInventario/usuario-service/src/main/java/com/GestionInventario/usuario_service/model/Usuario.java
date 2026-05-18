@@ -31,5 +31,5 @@ public class Usuario {
 
     @NotBlank(message = "El rol no puede estar vacío")
     @Column(nullable = false, length = 50)
-    private String rol; // Ej: "ADMIN", "BODEGUERO"
+    private String rol;
 }

@@ -26,7 +26,7 @@ public class OrdenCompra {
     private LocalDateTime fechaOrden = LocalDateTime.now();
 
     @Column(nullable = false, length = 50)
-    private String estado; // Ej: "PENDIENTE", "RECIBIDA", "CANCELADA"
+    private String estado;
 
     @NotNull(message = "El total es obligatorio")
     @Positive(message = "El total debe ser mayor a cero")

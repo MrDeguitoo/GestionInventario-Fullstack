@@ -34,5 +34,5 @@ public class Stock {
     @NotNull(message = "El stock mínimo es obligatorio")
     @Min(value = 0, message = "El stock mínimo no puede ser negativo")
     @Column(nullable = false)
-    private Integer stockMinimo; // Para disparar alertas si la cantidad baja de este número
+    private Integer stockMinimo;
 }

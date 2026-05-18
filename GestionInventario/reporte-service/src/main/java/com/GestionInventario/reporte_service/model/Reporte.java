@@ -18,13 +18,13 @@ public class Reporte {
     private Long id;
 
     @NotBlank(message = "El nombre del reporte es obligatorio")
-    private String nombreReporte; // Ej: "Cierre Mensual Agosto 2024"
+    private String nombreReporte;
 
     @NotBlank
-    private String tipoReporte; // Ej: "VALORIZACION_INVENTARIO", "PRODUCTOS_VENCIDOS"
+    private String tipoReporte;
 
     private LocalDateTime fechaGeneracion = LocalDateTime.now();
 
     @NotBlank
-    private String urlDescarga; // Un link simulado donde se guardó el PDF/Excel
+    private String urlDescarga;
 }

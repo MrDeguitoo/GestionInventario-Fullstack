@@ -25,13 +25,13 @@ public class AjusteInventario {
     private Long bodegaId;
 
     @NotNull(message = "La cantidad ajustada es obligatoria (puede ser negativa)")
-    private Integer cantidadAjustada; // Ej: -2 (Se perdieron 2)
+    private Integer cantidadAjustada;
 
     @NotBlank(message = "El motivo es obligatorio (Ej: Producto Vencido, Robo)")
     private String motivo;
 
     @NotBlank(message = "El usuario que aprueba el ajuste es obligatorio")
-    private String usuarioAprobador; // Podría ser el ID del usuario
+    private String usuarioAprobador;
 
     private LocalDateTime fechaAjuste = LocalDateTime.now();
 }

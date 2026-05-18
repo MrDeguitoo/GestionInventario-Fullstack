@@ -13,7 +13,6 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    // Endpoint para actualizar el stock (sumar o restar)
     @PutMapping("/actualizar")
     public ResponseEntity<Stock> actualizarStock(
             @RequestParam Long productoId,
