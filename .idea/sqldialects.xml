@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/GestionInventario/auditoria-service/src/main/resources/db/migration/V1__crear_tabla_auditoria.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/GestionInventario/bodega-service/src/main/resources/db/migration/V1__crear_tabla_bodegas.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/GestionInventario/compra-service/src/main/resources/db/migration/V1__crear_tabla_compras.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/GestionInventario/despacho-service/src/main/resources/db/migration/V1__crear_tabla_despachos.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/GestionInventario/inventario-service/src/main/resources/db/migration/V1__crear_tabla_inventario.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/GestionInventario/init.sql" dialect="GenericSQL" />
   </component>
 </project>
