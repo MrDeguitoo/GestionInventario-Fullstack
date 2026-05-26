@@ -37,20 +37,20 @@ public class OrdenCompraService {
     public Mono<ResumenCompraDTO> simularOrdenCompraParalela(Long proveedorId, Long usuarioId, List<Long> productoIds) {
 
         Mono<ProveedorDTO> llamadaProveedor = webClient.get()
-                .uri("http://localhost:8084/api/v1/proveedores/{id}", proveedorId)
+                .uri("http://ms-proveedor:8083/api/v1/proveedor/{id}", proveedorId)
                 .retrieve()
                 .bodyToMono(ProveedorDTO.class)
                 .onErrorReturn(new ProveedorDTO(0L, "00.000.000-0", "Proveedor No Disponible (Error de Conexión)", "", ""));
 
         Mono<UsuarioDTO> llamadaUsuario = webClient.get()
-                .uri("http://localhost:8090/api/v1/usuarios/{id}", usuarioId)
+                .uri("http://ms-usuario:8081/api/v1/usuarios/{id}", usuarioId)
                 .retrieve()
                 .bodyToMono(UsuarioDTO.class)
                 .onErrorReturn(new UsuarioDTO(0L, "Usuario No Disponible", "", ""));
 
         String idsParam = productoIds.stream().map(String::valueOf).collect(Collectors.joining(","));
         Mono<List<ProductoDTO>> llamadaProductos = webClient.get()
-                .uri("http://localhost:8081/api/v1/productos?ids={ids}", idsParam)
+                .uri("http://ms-producto:8084/api/v1/productos?ids={ids}", idsParam)
                 .retrieve()
                 .bodyToFlux(ProductoDTO.class)
                 .collectList()

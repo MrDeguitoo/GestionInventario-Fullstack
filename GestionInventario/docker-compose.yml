@@ -25,6 +25,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/usuario_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -43,6 +44,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/reporte_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+
     deploy:
       resources:
         limits:
@@ -61,6 +64,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/proveedor_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -79,6 +83,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/producto_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -97,6 +102,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/notificacion_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -115,6 +121,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/inventario_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -133,6 +140,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/despacho_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -151,6 +159,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/compra_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -169,6 +178,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/bodega_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
@@ -187,6 +197,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/auditoria_service
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
     deploy:
       resources:
         limits:
