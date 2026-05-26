@@ -38,5 +38,7 @@ public class OrdenCompra {
     @Size(max = 50, message = "El número de factura no puede tener más de 50 caracteres")
     @Column(length = 50)
     private String numeroFactura;
+
+    @Column(name = "fechaRecepcion")
     private LocalDateTime fechaRecepcion;
 }

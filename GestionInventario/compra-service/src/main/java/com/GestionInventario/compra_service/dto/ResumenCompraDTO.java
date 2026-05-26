@@ -1,11 +1,13 @@
 package com.GestionInventario.compra_service.dto;
 
+import lombok.Data;
 import java.util.List;
 
-public record ResumenCompraDTO(
-        ProveedorDTO proveedor,
-        UsuarioDTO usuarioAutorizador,
-        List<ProductoDTO> productos,
-        double totalEstimado
-) {
+@Data
+public class ResumenCompraDTO {
+    private ProveedorDTO proveedor;
+    private UsuarioDTO usuario;
+    private List<ProductoDTO> productos;
+    private Double total;
+    private String estado;
 }

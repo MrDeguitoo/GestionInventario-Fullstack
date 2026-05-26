@@ -1,4 +1,16 @@
 package com.GestionInventario.compra_service.dto;
 
-public record ProveedorDTO(Long id, String identificacion, String razonSocial, String correoVentas, String telefono) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProveedorDTO {
+    private Long id;
+    private String razonSocial;
+    private String identificacion;
+    private String correoVentas;
+    private String telefono;
 }

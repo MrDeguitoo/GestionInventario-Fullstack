@@ -13,6 +13,11 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-proot" ]
+      timeout: 5s
+      retries: 5
+      interval: 5s
 
   usuario-service:
     build:

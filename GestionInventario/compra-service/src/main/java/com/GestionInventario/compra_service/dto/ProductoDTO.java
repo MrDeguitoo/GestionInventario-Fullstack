@@ -1,5 +1,16 @@
 package com.GestionInventario.compra_service.dto;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ProductoDTO(Long id, String sku, String nombre, String descripcion, @JsonProperty("precioBase") double precio) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductoDTO {
+    private Long id;
+    private String sku;
+    private String nombre;
+    private Double precio;
+    private String descripcion;
 }

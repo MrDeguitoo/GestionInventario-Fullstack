@@ -5,10 +5,10 @@ import com.GestionInventario.compra_service.model.OrdenCompra;
 import com.GestionInventario.compra_service.repository.OrdenCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,49 +21,70 @@ public class OrdenCompraService {
     @Autowired
     private WebClient webClient;
 
-    public List<OrdenCompra> listarTodos() { return ordenCompraRepository.findAll(); }
+    public List<OrdenCompra> listarTodos() {
+        return ordenCompraRepository.findAll();
+    }
 
     public OrdenCompra buscarPorId(Long id) {
         return ordenCompraRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Orden de compra no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Orden de compra no encontrada con ID: " + id));
     }
 
-    @Transactional
-    public OrdenCompra guardar(OrdenCompra ordenCompra) { return ordenCompraRepository.save(ordenCompra); }
+    public void eliminar(Long id) {
+        ordenCompraRepository.deleteById(id);
+    }
 
-    @Transactional
-    public void eliminar(Long id) { ordenCompraRepository.deleteById(id); }
+    public OrdenCompra guardar(OrdenCompra orden) {
+        if (orden.getEstado() == null || orden.getEstado().isEmpty()) {
+            orden.setEstado("EN_PROCESO");
+        }
+        return ordenCompraRepository.save(orden);
+    }
 
     public Mono<ResumenCompraDTO> simularOrdenCompraParalela(Long proveedorId, Long usuarioId, List<Long> productoIds) {
 
-        Mono<ProveedorDTO> llamadaProveedor = webClient.get()
-                .uri("http://ms-proveedor:8083/api/v1/proveedor/{id}", proveedorId)
+        ProveedorDTO fallbackProveedor = new ProveedorDTO(proveedorId, "Proveedor Temporalmente No Disponible", "", "", "");
+        UsuarioDTO fallbackUsuario = new UsuarioDTO(usuarioId, "Usuario Autorizador No Disponible", "", "");
+        List<ProductoDTO> fallbackProductos = Collections.emptyList();
+
+        Mono<ProveedorDTO> proveedorMono = webClient.get()
+                .uri("http://proveedor-service:8083/api/v1/proveedores/{id}", proveedorId)
                 .retrieve()
                 .bodyToMono(ProveedorDTO.class)
-                .onErrorReturn(new ProveedorDTO(0L, "00.000.000-0", "Proveedor No Disponible (Error de Conexión)", "", ""));
+                .onErrorResume(e -> Mono.just(fallbackProveedor));
 
-        Mono<UsuarioDTO> llamadaUsuario = webClient.get()
-                .uri("http://ms-usuario:8081/api/v1/usuarios/{id}", usuarioId)
+        Mono<UsuarioDTO> usuarioMono = webClient.get()
+                .uri("http://usuario-service:8081/api/v1/usuarios/{id}", usuarioId)
                 .retrieve()
                 .bodyToMono(UsuarioDTO.class)
-                .onErrorReturn(new UsuarioDTO(0L, "Usuario No Disponible", "", ""));
+                .onErrorResume(e -> Mono.just(fallbackUsuario));
 
         String idsParam = productoIds.stream().map(String::valueOf).collect(Collectors.joining(","));
-        Mono<List<ProductoDTO>> llamadaProductos = webClient.get()
-                .uri("http://ms-producto:8084/api/v1/productos?ids={ids}", idsParam)
+        Mono<List<ProductoDTO>> productosMono = webClient.get()
+                .uri("http://producto-service:8084/api/v1/productos?ids={ids}", idsParam)
                 .retrieve()
                 .bodyToFlux(ProductoDTO.class)
                 .collectList()
-                .onErrorReturn(List.of());
+                .onErrorResume(e -> Mono.just(fallbackProductos));
 
-        return Mono.zip(llamadaProveedor, llamadaUsuario, llamadaProductos)
-                .map(tupla -> {
-                    ProveedorDTO proveedor = tupla.getT1();
-                    UsuarioDTO usuario = tupla.getT2();
-                    List<ProductoDTO> productos = tupla.getT3();
+        return Mono.zip(proveedorMono, usuarioMono, productosMono)
+                .map(tuple -> {
+                    ProveedorDTO proveedor = tuple.getT1();
+                    UsuarioDTO usuario = tuple.getT2();
+                    List<ProductoDTO> productos = tuple.getT3();
 
-                    double total = productos.stream().mapToDouble(ProductoDTO::precio).sum();
+                    double totalCalculado = productos.stream()
+                            .mapToDouble(ProductoDTO::getPrecio)
+                            .sum();
 
-                    return new ResumenCompraDTO(proveedor, usuario, productos, total);
+                    ResumenCompraDTO resumen = new ResumenCompraDTO();
+                    resumen.setProveedor(proveedor);
+                    resumen.setUsuario(usuario);
+                    resumen.setProductos(productos);
+                    resumen.setTotal(totalCalculado);
+                    resumen.setEstado("VISTA_PREVIA_SIMULADA");
+
+                    return resumen;
                 });
-    }}
+    }
+}
