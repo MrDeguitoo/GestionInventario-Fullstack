@@ -3,6 +3,8 @@ package com.GestionInventario.compra_service.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,11 @@ public class OrdenCompra {
 
     @NotNull(message = "El total es obligatorio")
     @Positive(message = "El total debe ser mayor a cero")
+    @Max(value = 999999999, message = "El total excede el límite permitido por el sistema")
     @Column(nullable = false)
     private Double total;
+    @Size(max = 50, message = "El número de factura no puede tener más de 50 caracteres")
+    @Column(length = 50)
+    private String numeroFactura;
+    private LocalDateTime fechaRecepcion;
 }
