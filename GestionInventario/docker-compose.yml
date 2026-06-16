@@ -13,21 +13,22 @@ services:
       - mysql_data:/var/lib/mysql
     ports:
       - "3307:3306"
+    # --- wena webito rey ---
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-proot" ]
+      test: ["CMD", "mysqladmin", "ping", "-proot"]
       timeout: 5s
       retries: 5
       interval: 5s
 
   usuario-service:
     build:
-      context: ./usuario-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./usuario-service/Dockerfile
     container_name: ms-usuario
     ports:
       - "8081:8081"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/usuario_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/usuario_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -36,37 +37,38 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   reporte-service:
     build:
-      context: ./reporte-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./reporte-service/Dockerfile
     container_name: ms-reporte
     ports:
       - "8082:8082"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/reporte_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/reporte_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
-
     deploy:
       resources:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   proveedor-service:
     build:
-      context: ./proveedor-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./proveedor-service/Dockerfile
     container_name: ms-proveedor
     ports:
       - "8083:8083"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/proveedor_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/proveedor_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -75,17 +77,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   producto-service:
     build:
-      context: ./producto-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./producto-service/Dockerfile
     container_name: ms-producto
     ports:
       - "8084:8084"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/producto_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/producto_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -94,17 +97,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   notificacion-service:
     build:
-      context: ./notificacion-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./notificacion-service/Dockerfile
     container_name: ms-notificacion
     ports:
       - "8085:8085"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/notificacion_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/notificacion_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -113,17 +117,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   inventario-service:
     build:
-      context: ./inventario-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./inventario-service/Dockerfile
     container_name: ms-inventario
     ports:
       - "8086:8086"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/inventario_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/inventario_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -132,17 +137,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   despacho-service:
     build:
-      context: ./despacho-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./despacho-service/Dockerfile
     container_name: ms-despacho
     ports:
       - "8087:8087"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/despacho_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/despacho_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -151,17 +157,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   compra-service:
     build:
-      context: ./compra-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./compra-service/Dockerfile
     container_name: ms-compra
     ports:
       - "8088:8088"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/compra_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/compra_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -170,17 +177,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   bodega-service:
     build:
-      context: ./bodega-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./bodega-service/Dockerfile
     container_name: ms-bodega
     ports:
       - "8089:8089"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/bodega_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/bodega_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -189,17 +197,18 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
   auditoria-service:
     build:
-      context: ./auditoria-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./auditoria-service/Dockerfile
     container_name: ms-auditoria
     ports:
       - "8090:8090"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/auditoria_service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db_mysql:3306/auditoria_service?createDatabaseIfNotExist=true
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -208,7 +217,8 @@ services:
         limits:
           memory: 256M
     depends_on:
-      - db_mysql
+      db_mysql:
+        condition: service_healthy
 
 volumes:
   mysql_data:
