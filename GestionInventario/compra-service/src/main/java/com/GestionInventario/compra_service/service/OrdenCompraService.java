@@ -73,14 +73,18 @@ public class OrdenCompraService {
                     UsuarioDTO usuario = tuple.getT2();
                     List<ProductoDTO> productos = tuple.getT3();
 
-                    double totalCalculado = productos.stream()
-                            .mapToDouble(ProductoDTO::getPrecio)
-                            .sum();
+                    double totalCalculado = 0.0;
+                    if (productos != null) {
+                        totalCalculado = productos.stream()
+                                .filter(p -> p != null && p.getPrecio() != null)
+                                .mapToDouble(ProductoDTO::getPrecio)
+                                .sum();
+                    }
 
                     ResumenCompraDTO resumen = new ResumenCompraDTO();
                     resumen.setProveedor(proveedor);
                     resumen.setUsuario(usuario);
-                    resumen.setProductos(productos);
+                    resumen.setProductos(productos != null ? productos : fallbackProductos);
                     resumen.setTotal(totalCalculado);
                     resumen.setEstado("VISTA_PREVIA_SIMULADA");
 
