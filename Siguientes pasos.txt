@@ -1,9 +1,0 @@
-Siguientes pasos:
--Falta comprobación con postman de cada micro servicio, básicamente repetir
-lo que hiciste con usuario para testear si funcionaba lo de flyway
--Después toca la implementación de OpenFeign para que los micro servicios
-se comuniquen entre si
--Y por ultimo ya seria el enrutamiento y registro con eureka y api Gateway
-
-sin investigación previa pero se supone que esto seria todo lo que
-nos falta en nuestro proyecto
