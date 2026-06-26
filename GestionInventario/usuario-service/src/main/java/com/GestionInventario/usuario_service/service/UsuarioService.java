@@ -20,7 +20,7 @@ public class UsuarioService {
 
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Usuario no encontrado con ID: " + id));
     }
 
     @Transactional

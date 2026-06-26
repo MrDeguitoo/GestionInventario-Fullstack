@@ -19,7 +19,7 @@ public class ReporteService {
 
     public Reporte buscarPorId(Long id) {
         return reporteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reporte no encontrado"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Reporte no encontrado"));
     }
 
     @Transactional

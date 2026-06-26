@@ -20,7 +20,7 @@ public class ProductoService {
 
     public Producto buscarPorId(Long id) {
         return productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Producto no encontrado con ID: " + id));
     }
 
     @Transactional
