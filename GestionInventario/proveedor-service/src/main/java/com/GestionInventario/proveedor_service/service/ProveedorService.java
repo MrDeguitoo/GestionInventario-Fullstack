@@ -18,7 +18,7 @@ public class ProveedorService {
 
     public Proveedor buscarPorId(Long id) {
         return proveedorRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Proveedor no encontrado con ID: " + id));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Proveedor no encontrado con ID: " + id));
     }
 
     @Transactional
