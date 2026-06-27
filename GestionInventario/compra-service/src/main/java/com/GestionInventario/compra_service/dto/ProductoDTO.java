@@ -12,7 +12,6 @@ public class ProductoDTO {
     private Long id;
     private String sku;
     private String nombre;
-    @JsonProperty("precioBase")
-    private Double precio;
+    private Double precioBase;
     private String descripcion;
 }
