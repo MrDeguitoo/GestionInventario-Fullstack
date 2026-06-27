@@ -19,7 +19,7 @@ public class NotificacionService {
 
     public Notificacion buscarPorId(Long id) {
         return notificacionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Notificacion no encontrada"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Notificacion no encontrada"));
     }
 
     @Transactional

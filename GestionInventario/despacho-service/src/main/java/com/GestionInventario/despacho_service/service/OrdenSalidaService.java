@@ -16,7 +16,7 @@ public class OrdenSalidaService {
 
     public OrdenSalida buscarPorId(Long id) {
         return ordenSalidaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Orden de salida no encontrada"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Orden de salida no encontrada"));
     }
 
     @Transactional

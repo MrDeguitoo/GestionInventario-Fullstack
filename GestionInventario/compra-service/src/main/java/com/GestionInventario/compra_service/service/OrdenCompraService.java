@@ -27,7 +27,7 @@ public class OrdenCompraService {
 
     public OrdenCompra buscarPorId(Long id) {
         return ordenCompraRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Orden de compra no encontrada con ID: " + id));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Orden de compra no encontrada con ID: " + id));
     }
 
     public void eliminar(Long id) {
@@ -48,7 +48,7 @@ public class OrdenCompraService {
         List<ProductoDTO> fallbackProductos = Collections.emptyList();
 
         Mono<ProveedorDTO> proveedorMono = webClient.get()
-                .uri("http://proveedor-service:8083/api/v1/proveedores/{id}", proveedorId)
+                .uri("http://proveedor-service:8083/api/v1/proveedor/{id}", proveedorId)
                 .retrieve()
                 .bodyToMono(ProveedorDTO.class)
                 .onErrorResume(e -> Mono.just(fallbackProveedor));

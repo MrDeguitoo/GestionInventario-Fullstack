@@ -5,7 +5,6 @@ import com.GestionInventario.inventario_service.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @Service
 public class StockService {
@@ -20,7 +19,7 @@ public class StockService {
         stock.setCantidadDisponible(stock.getCantidadDisponible() + cantidad);
 
         if (stock.getCantidadDisponible() < 0) {
-            throw new RuntimeException("No hay suficiente stock para realizar esta operación");
+            throw new IllegalArgumentException("No hay suficiente stock para realizar esta operación. Producto ID: " + productoId);
         }
 
         return stockRepository.save(stock);

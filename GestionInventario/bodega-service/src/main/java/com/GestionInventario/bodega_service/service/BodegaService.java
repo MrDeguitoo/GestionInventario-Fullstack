@@ -16,7 +16,7 @@ public class BodegaService {
 
     public Bodega buscarPorId(Long id) {
         return bodegaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Bodega no encontrada"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Bodega no encontrada"));
     }
 
     @Transactional

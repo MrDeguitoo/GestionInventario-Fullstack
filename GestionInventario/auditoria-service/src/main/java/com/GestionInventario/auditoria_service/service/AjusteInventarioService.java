@@ -16,7 +16,7 @@ public class AjusteInventarioService {
 
     public AjusteInventario buscarPorId(Long id) {
         return ajusteInventarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Auditoria no encontrada"));
+                .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Auditoria no encontrada"));
     }
 
     @Transactional
