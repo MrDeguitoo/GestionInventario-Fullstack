@@ -31,6 +31,6 @@ public class OrdenSalida {
 
     @NotBlank(message = "El destino es obligatorio (ej. Tienda Centro)")
     private String destino;
-
+    private String trackingCode;
     private LocalDateTime fechaSalida = LocalDateTime.now();
 }

@@ -2,17 +2,22 @@ package com.GestionInventario.despacho_service.service;
 
 import com.GestionInventario.despacho_service.model.OrdenSalida;
 import com.GestionInventario.despacho_service.repository.OrdenSalidaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class OrdenSalidaService {
-    @Autowired
-    private OrdenSalidaRepository ordenSalidaRepository;
 
-    public List<OrdenSalida> listarTodos() { return ordenSalidaRepository.findAll(); }
+    private final OrdenSalidaRepository ordenSalidaRepository;
+
+    public List<OrdenSalida> listarTodos() {
+        return ordenSalidaRepository.findAll();
+    }
 
     public OrdenSalida buscarPorId(Long id) {
         return ordenSalidaRepository.findById(id)
@@ -20,8 +25,20 @@ public class OrdenSalidaService {
     }
 
     @Transactional
-    public OrdenSalida guardar(OrdenSalida ordenSalida) { return ordenSalidaRepository.save(ordenSalida); }
+    public OrdenSalida guardar(OrdenSalida ordenSalida) {
+        return ordenSalidaRepository.save(ordenSalida);
+    }
 
     @Transactional
-    public void eliminar(Long id) { ordenSalidaRepository.deleteById(id); }
+    public OrdenSalida procesarDespacho(OrdenSalida ordenSalida) {
+        String codigoGenerado = "TRK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        ordenSalida.setTrackingCode(codigoGenerado);
+
+        return ordenSalidaRepository.save(ordenSalida);
+    }
+
+    @Transactional
+    public void eliminar(Long id) {
+        ordenSalidaRepository.deleteById(id);
+    }
 }

@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ms-api-gateway" />
       </profile>
       <profile name="Annotation profile for GestionInventario-parent" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -36,6 +37,7 @@
       <module name="compra-service" options="-parameters" />
       <module name="despacho-service" options="-parameters" />
       <module name="inventario-service" options="-parameters" />
+      <module name="ms-api-gateway" options="-parameters" />
       <module name="notificacion-service" options="-parameters" />
       <module name="producto-service" options="-parameters" />
       <module name="proveedor-service" options="-parameters" />
