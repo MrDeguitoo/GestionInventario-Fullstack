@@ -5,7 +5,7 @@ spring:
   application:
     name: ms-api-gateway
 
-#MrDeguito: Para no enredarme luego mejor asi
+  #MrDeguito: Para no enredarme luego mejor asi
 
   cloud:
     gateway:
