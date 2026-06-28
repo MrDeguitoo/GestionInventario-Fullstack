@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor // Implementamos la mejor práctica de Lombok
+@RequiredArgsConstructor
 public class BodegaService {
 
     private final BodegaRepository bodegaRepository;
@@ -25,14 +25,7 @@ public class BodegaService {
 
     @Transactional
     public Bodega guardar(Bodega bodega) {
-        // Antes de guardar, podríamos usar el nuevo método aquí mismo si quisiéramos
         return bodegaRepository.save(bodega);
-    }
-
-    // ¡NUEVO MÉTODO QUE EXIGE LA PRUEBA!
-    public boolean verificarEspacio(int capacidadMaxima, int volumenActual, int nuevoIngreso) {
-        // Si la suma del volumen actual más lo nuevo es menor o igual a la capacidad, hay espacio (true)
-        return (volumenActual + nuevoIngreso) <= capacidadMaxima;
     }
 
     @Transactional

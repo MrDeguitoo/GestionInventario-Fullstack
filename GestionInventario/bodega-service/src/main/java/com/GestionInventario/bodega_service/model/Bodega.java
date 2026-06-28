@@ -2,8 +2,6 @@ package com.GestionInventario.bodega_service.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +26,4 @@ public class Bodega {
 
     @Column(length = 50)
     private String tipo;
-    
-    @NotNull(message = "Debe definir la capacidad máxima")
-    @PositiveOrZero
-    private Integer capacidadMaxima;
-
-    @NotNull
-    @PositiveOrZero
-    private Integer volumenActual;
 }
