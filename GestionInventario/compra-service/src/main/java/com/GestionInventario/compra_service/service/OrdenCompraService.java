@@ -76,8 +76,8 @@ public class OrdenCompraService {
                     double totalCalculado = 0.0;
                     if (productos != null) {
                         totalCalculado = productos.stream()
-                                .filter(p -> p != null && p.getPrecio() != null)
-                                .mapToDouble(ProductoDTO::getPrecio)
+                                .filter(p -> p != null && p.getPrecioBase() != null)
+                                .mapToDouble(ProductoDTO::getPrecioBase)
                                 .sum();
                     }
 
