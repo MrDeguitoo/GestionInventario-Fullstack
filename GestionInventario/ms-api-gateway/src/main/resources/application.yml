@@ -11,7 +11,13 @@ spring:
     gateway:
       mvc:
         routes:
-          # RUTA 1: Servicio de Usuarios
+          # RUTA 1.1: Autenticación de Usuarios
+          - id: ruta-usuario-auth
+            uri: http://localhost:8081
+            predicates:
+              - Path=/api/v1/usuarios/auth/**
+
+          # RUTA 1.2: Servicio de Usuarios
           - id: ruta-usuario
             uri: http://localhost:8081
             predicates:
@@ -70,3 +76,6 @@ spring:
             uri: http://localhost:8090
             predicates:
               - Path=/api/v1/auditorias/**
+
+  jwt:
+    secret: 4046767676767676763272357538782F413F4428472B4B6250645367566B5970

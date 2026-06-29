@@ -29,6 +29,11 @@ public class Usuario {
     @Column(unique = true, nullable = false, length = 100)
     private String correo;
 
+
+    @NotBlank(message = "La contraseña es obligatoria")
+    @Column(nullable = false, length = 255)
+    private String password;
+
     @NotBlank(message = "El rol no puede estar vacío")
     @Column(nullable = false, length = 50)
     private String rol;

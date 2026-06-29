@@ -16,6 +16,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
         </processorPath>
         <module name="usuario-service" />
+        <module name="ms-api-gateway" />
         <module name="despacho-service" />
         <module name="notificacion-service" />
         <module name="producto-service" />
@@ -27,9 +28,6 @@
         <module name="reporte-service" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ms-api-gateway" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
