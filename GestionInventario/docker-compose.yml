@@ -20,6 +20,25 @@ services:
       retries: 5
       interval: 5s
 
+  ms-api-gateway:
+    build:
+      context: .
+      dockerfile: ./ms-api-gateway/Dockerfile
+    container_name: ms-api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - usuario-service
+      - reporte-service
+      - proveedor-service
+      - producto-service
+      - notificacion-service
+      - inventario-service
+      - despacho-service
+      - compra-service
+      - bodega-service
+      - auditoria-service
+
   usuario-service:
     build:
       context: .
