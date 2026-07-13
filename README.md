@@ -1,4 +1,5 @@
-# Salu' Por Eso
+# Gestion Inventario
+Estudiantes: Diego Uribe y Job Arjel
 - Sistema de Gestión de Inventario - Arquitectura de Microservicios
 
 Este proyecto es un sistema robusto de Gestión de Inventario construido bajo una arquitectura de Microservicios utilizando Spring Boot y Spring Cloud. Está diseñado para ser escalable, seguro y fácil de mantener.
