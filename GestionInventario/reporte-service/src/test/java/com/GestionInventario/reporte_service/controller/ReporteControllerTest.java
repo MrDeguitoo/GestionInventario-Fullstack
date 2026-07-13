@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +43,7 @@ class ReporteControllerTest {
         Reporte reporte1 = new Reporte(1L, "Reporte A", "PDF", LocalDateTime.now(), "https://example.com/a");
         Reporte reporte2 = new Reporte(2L, "Reporte B", "EXCEL", LocalDateTime.now(), "https://example.com/b");
 
-        when(reporteService.listarTodos()).thenReturn(List.of(reporte1, reporte2));
+        when(reporteService.listarTodos()).thenReturn(Arrays.asList(reporte1, reporte2));
 
         mockMvc.perform(get("/api/v1/reportes"))
                 .andExpect(status().isOk())

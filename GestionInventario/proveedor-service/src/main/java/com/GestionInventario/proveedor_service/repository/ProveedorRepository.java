@@ -2,8 +2,6 @@ package com.GestionInventario.proveedor_service.repository;
 
 import com.GestionInventario.proveedor_service.model.Proveedor;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 }

@@ -4,7 +4,6 @@ import com.GestionInventario.compra_service.dto.ResumenCompraDTO;
 import com.GestionInventario.compra_service.model.OrdenCompra;
 import com.GestionInventario.compra_service.service.OrdenCompraService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,11 @@ import java.util.List;
 @RequestMapping("/api/v1/compras")
 public class OrdenCompraController {
 
-    @Autowired
-    private OrdenCompraService ordenCompraService;
+    private final OrdenCompraService ordenCompraService;
+
+    public OrdenCompraController(OrdenCompraService ordenCompraService) {
+        this.ordenCompraService = ordenCompraService;
+    }
 
     @GetMapping
     public List<OrdenCompra> getAll() {

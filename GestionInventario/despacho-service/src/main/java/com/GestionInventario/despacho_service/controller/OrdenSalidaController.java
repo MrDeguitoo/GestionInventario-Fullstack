@@ -3,7 +3,6 @@ package com.GestionInventario.despacho_service.controller;
 import com.GestionInventario.despacho_service.model.OrdenSalida;
 import com.GestionInventario.despacho_service.service.OrdenSalidaService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/despacho")
 public class OrdenSalidaController {
-    @Autowired
-    private OrdenSalidaService ordenSalidaService;
+    private final OrdenSalidaService ordenSalidaService;
+
+    public OrdenSalidaController(OrdenSalidaService ordenSalidaService) {
+        this.ordenSalidaService = ordenSalidaService;
+    }
 
     @GetMapping
     public List<OrdenSalida> getAll() { return ordenSalidaService.listarTodos(); }

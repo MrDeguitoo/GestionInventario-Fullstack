@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +43,7 @@ class NotificacionControllerTest {
         Notificacion notificacion1 = new Notificacion(1L, "cliente@demo.com", "Bienvenida", "Hola", LocalDateTime.now(), "ENVIADO");
         Notificacion notificacion2 = new Notificacion(2L, "admin@demo.com", "Recordatorio", "Hola", LocalDateTime.now(), "PENDIENTE");
 
-        when(notificacionService.listarTodos()).thenReturn(List.of(notificacion1, notificacion2));
+        when(notificacionService.listarTodos()).thenReturn(Arrays.asList(notificacion1, notificacion2));
 
         mockMvc.perform(get("/api/v1/notificaciones"))
                 .andExpect(status().isOk())

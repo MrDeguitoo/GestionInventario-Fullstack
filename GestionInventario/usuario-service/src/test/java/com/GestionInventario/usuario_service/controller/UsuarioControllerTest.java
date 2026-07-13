@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +43,7 @@ class UsuarioControllerTest {
         Usuario usuario1 = new Usuario(1L, "Juan", "juan@correo.com", "123456", "CLIENTE");
         Usuario usuario2 = new Usuario(2L, "Ana", "ana@correo.com", "123456", "ADMIN");
 
-        when(usuarioService.listarTodos()).thenReturn(List.of(usuario1, usuario2));
+        when(usuarioService.listarTodos()).thenReturn(Arrays.asList(usuario1, usuario2));
 
         mockMvc.perform(get("/api/v1/usuarios"))
                 .andExpect(status().isOk())

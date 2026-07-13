@@ -2,15 +2,17 @@ package com.GestionInventario.auditoria_service.service;
 
 import com.GestionInventario.auditoria_service.model.AjusteInventario;
 import com.GestionInventario.auditoria_service.repository.AjusteInventarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
 public class AjusteInventarioService {
-    @Autowired
-    private AjusteInventarioRepository ajusteInventarioRepository;
+    private final AjusteInventarioRepository ajusteInventarioRepository;
+
+    public AjusteInventarioService(AjusteInventarioRepository ajusteInventarioRepository) {
+        this.ajusteInventarioRepository = ajusteInventarioRepository;
+    }
 
     public List<AjusteInventario> listarTodos() { return ajusteInventarioRepository.findAll(); }
 

@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -50,7 +50,7 @@ class OrdenCompraControllerTest {
         OrdenCompra orden1 = new OrdenCompra(1L, 10L, LocalDateTime.now(), "EN_PROCESO", 5000.0, "FAC-001", null);
         OrdenCompra orden2 = new OrdenCompra(2L, 11L, LocalDateTime.now(), "CERRADA", 12000.0, "FAC-002", null);
 
-        when(ordenCompraService.listarTodos()).thenReturn(List.of(orden1, orden2));
+        when(ordenCompraService.listarTodos()).thenReturn(Arrays.asList(orden1, orden2));
 
         mockMvc.perform(get("/api/v1/compras"))
                 .andExpect(status().isOk())
@@ -103,7 +103,7 @@ class OrdenCompraControllerTest {
         resumen.setTotal(1500.0);
         resumen.setProveedor(new ProveedorDTO(10L, "Proveedor Demo", "", "", ""));
         resumen.setUsuario(new UsuarioDTO(2L, "Usuario Demo", "", ""));
-        resumen.setProductos(List.of(new ProductoDTO(100L, "SKU-1", "Producto 1", 1500.0)));
+        resumen.setProductos(Arrays.asList(new ProductoDTO(100L, "SKU-1", "Producto 1", 1500.0, "Descripción demo")));
 
         when(ordenCompraService.simularOrdenCompraParalela(anyLong(), anyLong(), anyList()))
                 .thenReturn(Mono.just(resumen));

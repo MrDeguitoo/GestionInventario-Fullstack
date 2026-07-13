@@ -2,7 +2,6 @@ package com.GestionInventario.reporte_service.service;
 
 import com.GestionInventario.reporte_service.model.Reporte;
 import com.GestionInventario.reporte_service.repository.ReporteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class ReporteService {
 
-    @Autowired
-    private ReporteRepository reporteRepository;
+    private final ReporteRepository reporteRepository;
+
+    public ReporteService(ReporteRepository reporteRepository) {
+        this.reporteRepository = reporteRepository;
+    }
 
     public List<Reporte> listarTodos() {
         return reporteRepository.findAll();

@@ -2,14 +2,16 @@ package com.GestionInventario.inventario_service.service;
 
 import com.GestionInventario.inventario_service.model.Stock;
 import com.GestionInventario.inventario_service.repository.StockRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StockService {
-    @Autowired
-    private StockRepository stockRepository;
+    private final StockRepository stockRepository;
+
+    public StockService(StockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
 
     @Transactional
     public Stock actualizarStock(Long productoId, Long bodegaId, Integer cantidad) {

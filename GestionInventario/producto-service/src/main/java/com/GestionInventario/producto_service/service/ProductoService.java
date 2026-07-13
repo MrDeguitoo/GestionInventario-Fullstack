@@ -2,7 +2,6 @@ package com.GestionInventario.producto_service.service;
 
 import com.GestionInventario.producto_service.model.Producto;
 import com.GestionInventario.producto_service.repository.ProductoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,8 +10,11 @@ import java.util.List;
 @Service
 public class ProductoService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
+
+    public ProductoService(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
 
     public List<Producto> listarTodos() {
         return productoRepository.findAll();

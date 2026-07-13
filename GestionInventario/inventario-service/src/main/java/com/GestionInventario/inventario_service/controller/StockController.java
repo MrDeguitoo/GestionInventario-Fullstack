@@ -2,7 +2,6 @@ package com.GestionInventario.inventario_service.controller;
 
 import com.GestionInventario.inventario_service.model.Stock;
 import com.GestionInventario.inventario_service.service.StockService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/inventario")
 public class StockController {
 
-    @Autowired
-    private StockService stockService;
+    private final StockService stockService;
+
+    public StockController(StockService stockService) {
+        this.stockService = stockService;
+    }
 
     @PutMapping("/actualizar")
     public ResponseEntity<Stock> actualizarStock(

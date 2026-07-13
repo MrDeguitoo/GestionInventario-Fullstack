@@ -3,7 +3,6 @@ package com.GestionInventario.compra_service.service;
 import com.GestionInventario.compra_service.dto.*;
 import com.GestionInventario.compra_service.model.OrdenCompra;
 import com.GestionInventario.compra_service.repository.OrdenCompraRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -15,11 +14,13 @@ import java.util.stream.Collectors;
 @Service
 public class OrdenCompraService {
 
-    @Autowired
-    private OrdenCompraRepository ordenCompraRepository;
+    private final OrdenCompraRepository ordenCompraRepository;
+    private final WebClient webClient;
 
-    @Autowired
-    private WebClient webClient;
+    public OrdenCompraService(OrdenCompraRepository ordenCompraRepository, WebClient webClient) {
+        this.ordenCompraRepository = ordenCompraRepository;
+        this.webClient = webClient;
+    }
 
     public List<OrdenCompra> listarTodos() {
         return ordenCompraRepository.findAll();

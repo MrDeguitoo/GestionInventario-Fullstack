@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +42,7 @@ class ProductoControllerTest {
         Producto producto1 = new Producto(1L, "SKU-001", "Producto A", "Desc A", 100.0);
         Producto producto2 = new Producto(2L, "SKU-002", "Producto B", "Desc B", 200.0);
 
-        when(productoService.listarTodos()).thenReturn(List.of(producto1, producto2));
+        when(productoService.listarTodos()).thenReturn(Arrays.asList(producto1, producto2));
 
         mockMvc.perform(get("/api/v1/productos"))
                 .andExpect(status().isOk())

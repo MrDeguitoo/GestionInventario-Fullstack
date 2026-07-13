@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,7 +43,7 @@ class OrdenSalidaControllerTest {
         OrdenSalida orden1 = new OrdenSalida(1L, 10L, 20L, 3, "Tienda Centro", "TRK-001", LocalDateTime.now());
         OrdenSalida orden2 = new OrdenSalida(2L, 11L, 21L, 5, "Tienda Norte", "TRK-002", LocalDateTime.now());
 
-        when(ordenSalidaService.listarTodos()).thenReturn(List.of(orden1, orden2));
+        when(ordenSalidaService.listarTodos()).thenReturn(Arrays.asList(orden1, orden2));
 
         mockMvc.perform(get("/api/v1/despacho"))
                 .andExpect(status().isOk())

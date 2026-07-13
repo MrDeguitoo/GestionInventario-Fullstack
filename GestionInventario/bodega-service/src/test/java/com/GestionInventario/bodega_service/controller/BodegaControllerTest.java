@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,7 +40,7 @@ class BodegaControllerTest {
         Bodega bodega1 = new Bodega(1L, "Bodega Norte", "Calle 123", "Central");
         Bodega bodega2 = new Bodega(2L, "Bodega Sur", "Avenida 456", "Frigorífica");
 
-        when(bodegaService.listarTodos()).thenReturn(List.of(bodega1, bodega2));
+        when(bodegaService.listarTodos()).thenReturn(Arrays.asList(bodega1, bodega2));
 
         mockMvc.perform(get("/api/v1/bodegas"))
                 .andExpect(status().isOk())

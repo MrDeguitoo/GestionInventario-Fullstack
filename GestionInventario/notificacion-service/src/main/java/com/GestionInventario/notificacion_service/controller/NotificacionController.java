@@ -3,7 +3,6 @@ package com.GestionInventario.notificacion_service.controller;
 import com.GestionInventario.notificacion_service.model.Notificacion;
 import com.GestionInventario.notificacion_service.service.NotificacionService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/notificaciones")
 public class NotificacionController {
-    @Autowired
-    private NotificacionService notificacionService;
+    private final NotificacionService notificacionService;
+
+    public NotificacionController(NotificacionService notificacionService) {
+        this.notificacionService = notificacionService;
+    }
 
     @GetMapping
     public List<Notificacion> getAll() { return notificacionService.listarTodos(); }

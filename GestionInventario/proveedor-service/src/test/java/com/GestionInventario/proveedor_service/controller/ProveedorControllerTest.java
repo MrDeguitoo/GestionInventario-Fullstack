@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +42,7 @@ class ProveedorControllerTest {
         Proveedor proveedor1 = new Proveedor(1L, "123", "Proveedor A", "proveedorA@test.com", "123456789");
         Proveedor proveedor2 = new Proveedor(2L, "456", "Proveedor B", "proveedorB@test.com", "987654321");
 
-        when(proveedorService.listarTodos()).thenReturn(List.of(proveedor1, proveedor2));
+        when(proveedorService.listarTodos()).thenReturn(Arrays.asList(proveedor1, proveedor2));
 
         mockMvc.perform(get("/api/v1/proveedor"))
                 .andExpect(status().isOk())
