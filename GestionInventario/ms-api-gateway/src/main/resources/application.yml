@@ -13,67 +13,67 @@ spring:
         routes:
           # RUTA 1.1: Autenticación de Usuarios
           - id: ruta-usuario-auth
-            uri: http://usuario-service:8081
+            uri: http://localhost:8081
             predicates:
               - Path=/api/v1/usuarios/auth/**
 
           # RUTA 1.2: Servicio de Usuarios
           - id: ruta-usuario
-            uri: http://usuario-service:8081
+            uri: http://localhost:8081
             predicates:
               - Path=/api/v1/usuarios/**
 
           # RUTA 2: Servicio de Reportes
           - id: ruta-reporte
-            uri: http://reporte-service:8082
+            uri: http://localhost:8082
             predicates:
               - Path=/api/v1/reportes/**
 
           # RUTA 3: Servicio de Proveedores
           - id: ruta-proveedor
-            uri: http://proveedor-service:8083
+            uri: http://localhost:8083
             predicates:
               - Path=/api/v1/proveedor/**
 
           # RUTA 4: Servicio de Productos
           - id: ruta-producto
-            uri: http://producto-service:8084
+            uri: http://localhost:8084
             predicates:
               - Path=/api/v1/productos/**
 
           # RUTA 5: Servicio de Notificaciones
           - id: ruta-notificacion
-            uri: http://notificacion-service:8085
+            uri: http://localhost:8085
             predicates:
               - Path=/api/v1/notificaciones/**
 
           # RUTA 6: Servicio de Inventarios
           - id: ruta-inventario
-            uri: http://inventario-service:8086
+            uri: http://localhost:8086
             predicates:
               - Path=/api/v1/inventarios/**
 
           # RUTA 7: Servicio de Despachos
           - id: ruta-despacho
-            uri: http://despacho-service:8087
+            uri: http://localhost:8087
             predicates:
               - Path=/api/v1/despachos/**
 
           # RUTA 8: Servicio de Compras
           - id: ruta-compra
-            uri: http://compra-service:8088
+            uri: http://localhost:8088
             predicates:
               - Path=/api/v1/compras/**
 
           # RUTA 9: Servicio de Bodegas
           - id: ruta-bodega
-            uri: http://bodega-service:8089
+            uri: http://localhost:8089
             predicates:
               - Path=/api/v1/bodegas/**
 
           # RUTA 10: Servicio de Auditorias
           - id: ruta-auditoria
-            uri: http://auditoria-service:8090
+            uri: http://localhost:8090
             predicates:
               - Path=/api/v1/auditorias/**
 
