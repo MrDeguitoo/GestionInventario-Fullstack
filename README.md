@@ -32,6 +32,24 @@ Reporte Service (reporte-service): Generación de métricas e informes.
 
 Auditoria Service (auditoria-service): Trazabilidad de ajustes manuales.
 
+-  Rutas principales del API Gateway (Puerto 8080)
+
+El API Gateway actúa como punto único de entrada, intercepta las peticiones y las enruta dinámicamente hacia los microservicios correspondientes según los siguientes prefijos de ruta:
+
+| Microservicio | Ruta en el Gateway | Puerto Interno |
+| :--- | :--- | :--- |
+| **Usuario Service** | `http://localhost:8080/api/v1/usuarios/**` | Puerto 8081 |
+| **Bodega Service** | `http://localhost:8080/api/v1/bodegas/**` | Puerto 8082 |
+| **Producto Service** | `http://localhost:8080/api/v1/productos/**` | Puerto 8083 |
+| **Proveedor Service** | `http://localhost:8080/api/v1/proveedor/**` | Puerto 8084 |
+| **Inventario Service**| `http://localhost:8080/api/v1/inventario/**`| Puerto 8085 |
+| **Compra Service** | `http://localhost:8080/api/v1/compras/**` | Puerto 8086 |
+| **Despacho Service** | `http://localhost:8080/api/v1/despacho/**` | Puerto 8087 |
+| **Notificación Service**| `http://localhost:8080/api/v1/notificaciones/**`| Puerto 8088 |
+| **Reporte Service** | `http://localhost:8080/api/v1/reportes/**` | Puerto 8089 |
+| **Auditoria Service** | `http://localhost:8080/api/v1/auditoria/**` | Puerto 8090 |
+
+
 - Tecnologías Utilizadas
 
 Backend: Java 21, Spring Boot 3.2.x, Spring Cloud Gateway MVC.
@@ -93,3 +111,17 @@ Ejecuta la petición 1.2 Hacer Login.
 
 Copia el token JWT de la respuesta y pégalo en la variable @token en la parte superior del archivo.
 
+- Enlaces a la Documentación Swagger (OpenAPI)
+
+Cada microservicio cuenta con su propia documentación técnica autogenerada. Cuando el ecosistema se encuentre en ejecución local, puedes acceder a la interfaz interactiva de Swagger UI mediante los siguientes enlaces:
+
+- **Usuario Service:** [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
+- **Bodega Service:** [http://localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html)
+- **Producto Service:** [http://localhost:8083/swagger-ui/index.html](http://localhost:8083/swagger-ui/index.html)
+- **Proveedor Service:** [http://localhost:8084/swagger-ui/index.html](http://localhost:8084/swagger-ui/index.html)
+- **Inventario Service:** [http://localhost:8085/swagger-ui/index.html](http://localhost:8085/swagger-ui/index.html)
+- **Compra Service:** [http://localhost:8086/swagger-ui/index.html](http://localhost:8086/swagger-ui/index.html)
+- **Despacho Service:** [http://localhost:8087/swagger-ui/index.html](http://localhost:8087/swagger-ui/index.html)
+- **Notificación Service:** [http://localhost:8088/swagger-ui/index.html](http://localhost:8088/swagger-ui/index.html)
+- **Reporte Service:** [http://localhost:8089/swagger-ui/index.html](http://localhost:8089/swagger-ui/index.html)
+- **Auditoria Service:** [http://localhost:8090/swagger-ui/index.html](http://localhost:8090/swagger-ui/index.html)
