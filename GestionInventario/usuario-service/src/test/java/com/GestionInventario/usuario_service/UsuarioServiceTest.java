@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,6 +21,9 @@ public class UsuarioServiceTest {
 	@Mock
 	private UsuarioRepository usuarioRepository;
 
+	@Mock
+	private PasswordEncoder passwordEncoder;
+
 	@InjectMocks
 	private UsuarioService usuarioService;
 
@@ -29,6 +33,7 @@ public class UsuarioServiceTest {
 		Usuario entrada = new Usuario();
 		entrada.setNombre("Juan Perez");
 		entrada.setCorreo("juan@correo.com");
+		entrada.setPassword("12345"); // Asegúrate de asignarle contraseña si tu servicio la procesa
 		entrada.setRol("");
 
 		Usuario guardado = new Usuario();
@@ -37,12 +42,15 @@ public class UsuarioServiceTest {
 		guardado.setCorreo("juan@correo.com");
 		guardado.setRol("CLIENTE");
 
+		when(passwordEncoder.encode(any(CharSequence.class))).thenReturn("passwordEncriptado");
 		when(usuarioRepository.save(any(Usuario.class))).thenReturn(guardado);
 
 		Usuario resultado = usuarioService.guardar(entrada);
 
 		assertNotNull(resultado);
 		assertEquals("CLIENTE", resultado.getRol());
+
+		verify(passwordEncoder, times(1)).encode(any(CharSequence.class));
 		verify(usuarioRepository, times(1)).save(any(Usuario.class));
 	}
 }

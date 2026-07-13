@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult; // Importación necesaria para capturar el resultado asíncrono
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch; // Importación estática necesaria para despachar el flujo reactivo
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -108,11 +110,15 @@ class OrdenCompraControllerTest {
         when(ordenCompraService.simularOrdenCompraParalela(anyLong(), anyLong(), anyList()))
                 .thenReturn(Mono.just(resumen));
 
-        mockMvc.perform(post("/api/v1/compras/simular-paralelo")
+        MvcResult mvcResult = mockMvc.perform(post("/api/v1/compras/simular-paralelo")
                         .param("proveedorId", "10")
                         .param("usuarioId", "2")
                         .param("productoIds", "100", "101"))
+                .andReturn();
+
+        mockMvc.perform(asyncDispatch(mvcResult))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.estado").value("VISTA_PREVIA_SIMULADA"));
+                .andExpect(jsonPath("$.estado").value("VISTA_PREVIA_SIMULADA"))
+                .andExpect(jsonPath("$.total").value(1500.0));
     }
 }
