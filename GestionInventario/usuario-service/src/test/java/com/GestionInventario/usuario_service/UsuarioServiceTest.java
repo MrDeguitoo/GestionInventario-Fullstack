@@ -33,7 +33,7 @@ public class UsuarioServiceTest {
 		Usuario entrada = new Usuario();
 		entrada.setNombre("Juan Perez");
 		entrada.setCorreo("juan@correo.com");
-		entrada.setPassword("12345"); // Asegúrate de asignarle contraseña si tu servicio la procesa
+		entrada.setPassword("12345");
 		entrada.setRol("");
 
 		Usuario guardado = new Usuario();
