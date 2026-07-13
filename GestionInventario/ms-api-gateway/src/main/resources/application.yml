@@ -51,13 +51,13 @@ spring:
           - id: ruta-inventario
             uri: http://inventario-service:8086
             predicates:
-              - Path=/api/v1/inventarios/**
+              - Path=/api/v1/inventario/**
 
           # RUTA 7: Servicio de Despachos
           - id: ruta-despacho
             uri: http://despacho-service:8087
             predicates:
-              - Path=/api/v1/despachos/**
+              - Path=/api/v1/despacho/**
 
           # RUTA 8: Servicio de Compras
           - id: ruta-compra
@@ -75,7 +75,7 @@ spring:
           - id: ruta-auditoria
             uri: http://auditoria-service:8090
             predicates:
-              - Path=/api/v1/auditorias/**
+              - Path=/api/v1/auditoria/**
 
   jwt:
     secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}

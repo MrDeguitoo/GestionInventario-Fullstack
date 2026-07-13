@@ -1,0 +1,188 @@
+### VARIABLES GLOBALES
+@baseUrl = http://localhost:8080/api/v1
+# Reemplaza el valor de abajo con el token real que te dé el Login
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTc4MzkyMzYwOCwiZXhwIjoxNzgzOTU5NjA4fQ.qduFSgLr3kNyoeWjGh7-fiM3bW1MUP-pprC2lgfjVjQ
+
+---
+### ==========================================
+### 1. MICROSERVICIO DE USUARIOS
+### ==========================================
+
+### 1.1 Registrar Administrador (Bypass directo al 8081)
+POST http://localhost:8081/api/v1/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Admin",
+  "correo": "admin@mail.com",
+  "password": "adminpassword",
+  "rol": "ADMIN"
+}
+
+### 1.2 Hacer Login (Obtener Token)
+POST {{baseUrl}}/usuarios/auth/login
+Content-Type: application/json
+
+{
+  "correo": "admin@mail.com",
+  "password": "adminpassword"
+}
+
+### 1.3 Listar Todos los Usuarios (Ruta protegida)
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+
+---
+### ==========================================
+### 2. MICROSERVICIO DE BODEGAS
+### ==========================================
+
+### 2.1 Crear Bodega
+POST {{baseUrl}}/bodegas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Bodega Centro Docker",
+  "direccion": "Santiago, Chile",
+  "capacidad": 5000,
+  "tipo": "CENTRAL"
+}
+
+---
+### ==========================================
+### 3. MICROSERVICIO DE PRODUCTOS
+### ==========================================
+
+### 3.1 Crear Producto
+POST {{baseUrl}}/productos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sku": "TOR-ANC-38",
+  "nombre": "Tornillo de Anclaje 3/8",
+  "precioBase": 1250.0,
+  "descripcion": "Tornillo de acero galvanizado"
+}
+
+---
+### ==========================================
+### 4. MICROSERVICIO DE PROVEEDORES
+### ==========================================
+
+### 4.1 Crear Proveedor (Nota: Ruta en singular /proveedor)
+POST {{baseUrl}}/proveedor
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "razonSocial": "Distribuidora Industrial Spa",
+  "identificacion": "77.666.555-4",
+  "correoVentas": "contacto@distribuidora.cl",
+  "telefono": "+56912345678"
+}
+
+---
+### ==========================================
+### 5. MICROSERVICIO DE INVENTARIO
+### ==========================================
+
+### 5.1 Actualizar Stock (Nota: Ruta en singular /inventario y método PUT)
+PUT {{baseUrl}}/inventario/actualizar?productoId=1&bodegaId=1&cantidad=150
+Authorization: Bearer {{token}}
+
+---
+### ==========================================
+### 6. MICROSERVICIO DE COMPRAS
+### ==========================================
+
+### 6.1 Crear Orden de Compra Estándar
+POST {{baseUrl}}/compras
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "proveedorId": 1,
+  "usuarioId": 1,
+  "total": 187500.0,
+  "estado": "PENDIENTE"
+}
+
+### 6.2 Simular Orden de Compra Paralela (Usa Query Params)
+POST {{baseUrl}}/compras/simular-paralelo?proveedorId=1&usuarioId=1&productoIds=1,2,3
+Authorization: Bearer {{token}}
+
+---
+### ==========================================
+### 7. MICROSERVICIO DE DESPACHOS
+### ==========================================
+
+### 7.1 Registrar Orden de Salida (Ajustado con trackingCode)
+POST {{baseUrl}}/despacho
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productoId": 1,
+  "bodegaId": 1,
+  "cantidad": 30,
+  "destino": "Cliente Central",
+  "estado": "EN_TRANSITO",
+  "trackingCode": "TRK-987654321"
+}
+
+---
+### ==========================================
+### 8. MICROSERVICIO DE NOTIFICACIONES
+### ==========================================
+
+### 8.1 Crear Notificación
+POST {{baseUrl}}/notificaciones
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "asunto": "Alerta de Stock",
+  "correoDestino": "admin@mail.com",
+  "estadoEnvio": "PENDIENTE",
+  "mensaje": "Stock bajo en Bodega Central"
+}
+
+---
+### ==========================================
+### 9. MICROSERVICIO DE REPORTES
+### ==========================================
+
+### 9.1 Crear Reporte
+POST {{baseUrl}}/reportes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombreReporte": "Reporte Mensual Julio",
+  "tipoReporte": "STOCK_MENSUAL",
+  "urlDescarga": "http://localhost/descargas/reporte-julio.pdf"
+}
+
+---
+### ==========================================
+### 10. MICROSERVICIO DE AUDITORÍA
+### ==========================================
+
+### 10.1 Crear Ajuste de Inventario (Nota: Ruta en singular /auditoria)
+POST {{baseUrl}}/auditoria
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "productoId": 1,
+  "bodegaId": 1,
+  "cantidadAjustada": -5,
+  "motivo": "Merma por daño",
+  "usuarioAprobador": 1
+}
+
+### 10.2 Listar Todos los Ajustes de Auditoría
+GET {{baseUrl}}/auditoria
+Authorization: Bearer {{token}}
